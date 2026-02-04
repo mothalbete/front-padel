@@ -11,13 +11,12 @@ import Dashboard from "./pages/Dashboard";
 import MisReservas from "./pages/MisReservas";
 import "./App.css";
 
-// Ejemplos de páginas protegidas
 import ReservarPage from "./pages/ReservarPage";
 import AdminPanel from "./pages/AdminPanel";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/front-padel">
       <Navbar />
 
       <Routes>
@@ -25,19 +24,18 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
 
+        {/* Mis reservas */}
+        <Route
+          path="/mis-reservas"
+          element={
+            <ProtectedRoute>
+              <MisReservas />
+            </ProtectedRoute>
+          }
+        />
 
-      < Route
-        path="/mis-reservas"
-        element={
-          <ProtectedRoute>
-            <MisReservas />
-          </ProtectedRoute>
-        }
-      />
-
-
+        {/* Dashboard */}
         <Route
           path="/dashboard"
           element={
@@ -47,7 +45,7 @@ export default function App() {
           }
         />
 
-        {/* Rutas protegidas normales */}
+        {/* Reservar */}
         <Route
           path="/reservar"
           element={
@@ -57,7 +55,7 @@ export default function App() {
           }
         />
 
-        {/* Rutas solo para admin */}
+        {/* Admin */}
         <Route
           path="/admin"
           element={
