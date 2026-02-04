@@ -1,11 +1,24 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
 
+  // Efecto: navbar cambia al hacer scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const nav = document.querySelector(".navbar");
+      if (window.scrollY > 10) nav.classList.add("scrolled");
+      else nav.classList.remove("scrolled");
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary px-3 shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary px-3 shadow-sm modern-navbar">
       <div className="container-fluid">
 
         {/* Marca */}
@@ -29,14 +42,12 @@ export default function Navbar() {
           {/* Izquierda */}
           <ul className="navbar-nav me-auto">
 
-            {/* Inicio */}
             <li className="nav-item">
               <Link className="nav-link" to="/dashboard">
                 Inicio
               </Link>
             </li>
 
-            {/* Reservar */}
             {user && (
               <li className="nav-item">
                 <Link className="nav-link" to="/reservar">
@@ -45,7 +56,6 @@ export default function Navbar() {
               </li>
             )}
 
-            {/* Mis reservas */}
             {user && (
               <li className="nav-item">
                 <Link className="nav-link" to="/mis-reservas">
@@ -54,7 +64,6 @@ export default function Navbar() {
               </li>
             )}
 
-            {/* Panel admin */}
             {user && user.role === "admin" && (
               <li className="nav-item">
                 <Link className="nav-link" to="/admin">
@@ -67,7 +76,6 @@ export default function Navbar() {
           {/* Derecha */}
           <ul className="navbar-nav ms-auto">
 
-            {/* Si NO está logueado */}
             {!user && (
               <>
                 <li className="nav-item">
@@ -84,7 +92,6 @@ export default function Navbar() {
               </>
             )}
 
-            {/* Si está logueado */}
             {user && (
               <li className="nav-item">
                 <button

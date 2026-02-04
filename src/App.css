@@ -1,147 +1,235 @@
-/* Tarjetas generales */
-.reserva-card {
-  border-radius: 14px;
-  border: 1px solid #dcdcdc;
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+/* ============================
+   ESTILO GLOBAL MODERNO
+   ============================ */
+
+:root {
+  --primary: #0d6efd;
+  --primary-dark: #0b5ed7;
+  --bg-light: #f5f7fa;
+  --text-dark: #1f1f1f;
+  --radius: 10px;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 6px 18px rgba(0,0,0,0.12);
+  --transition: 0.25s ease;
 }
 
-.reserva-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+/* Fondo general */
+body {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  letter-spacing: 0.2px;
 }
 
-/* Títulos */
-.reserva-header {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 6px;
-}
+/* ============================
+   NAVBAR
+   ============================ */
 
-/* Fecha */
-.reserva-fecha {
-  font-weight: 500;
-  color: #555;
-}
-
-/* Horarios */
-.reserva-horario {
-  background: #f3f4f6;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #e2e2e2;
-  margin-bottom: 6px;
-  font-size: 0.95rem;
-}
-
-/* Total */
-.reserva-total {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #0f5132;
-}
-
-/* Botón cancelar */
-.btn-cancelar {
-  background: #b02a37;
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: 600;
-  color: white;
-  transition: background 0.2s ease;
-}
-
-.btn-cancelar:hover {
-  background: #92232e;
-}
-
-/* Caja de desglose */
-.desglose-box {
-  border-radius: 14px;
-  background: #f8f9fa;
-  border: 1px solid #dcdcdc;
-  padding: 20px;
-}
-
-.desglose-box h5 {
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-/* Botón reservar */
-.btn-reservar {
-  font-size: 1.15rem;
-  padding: 12px 20px;
-  font-weight: 600;
-  border-radius: 10px;
-}
-
-/* Navbar más seria */
 .navbar {
-  background: #1f2937 !important; /* gris oscuro elegante */
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  transition: background var(--transition), box-shadow var(--transition);
 }
 
-.navbar-brand {
-  font-weight: 700;
-  color: #ffffff !important;
-  letter-spacing: 0.5px;
+.navbar.scrolled {
+  background: var(--primary-dark) !important;
+  box-shadow: var(--shadow);
 }
 
 .nav-link {
-  color: #e5e7eb !important;
-  font-weight: 500;
+  position: relative;
+  transition: color var(--transition);
 }
 
 .nav-link:hover {
-  color: #ffffff !important;
+  color: #fff !important;
 }
 
-.btn-outline-light {
-  border-width: 2px;
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: white;
+  transition: width var(--transition);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ============================
+   BOTONES
+   ============================ */
+
+.btn {
+  border-radius: var(--radius);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ============================
+   TARJETAS / CONTENEDORES
+   ============================ */
+
+.card,
+.panel,
+.box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover,
+.panel:hover,
+.box:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ============================
+   INPUTS / FORMULARIOS
+   ============================ */
+
+input,
+select,
+textarea {
+  border-radius: var(--radius);
+  border: 1px solid #d0d4da;
+  padding: 0.55rem 0.75rem;
+  transition: border var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(13,110,253,0.25);
+}
+
+/* ============================
+   TITULARES
+   ============================ */
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+h4, h5, h6 {
   font-weight: 600;
 }
 
-/* Formularios */
-.card {
-  border-radius: 14px !important;
+/* ============================
+   ANIMACIÓN SUAVE DE APARICIÓN
+   ============================ */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.5s forwards ease-out;
 }
 
-.form-label {
-  font-weight: 600;
-  color: #333;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.form-control,
-.form-select {
-  border-radius: 10px;
-  border: 1px solid #cfcfcf;
-  padding: 10px;
+/* ============================
+   BOTÓN HAMBURGUESA (mejorado)
+   ============================ */
+
+.navbar-toggler {
+  border-radius: var(--radius);
+  padding: 0.4rem 0.6rem;
+  transition: background var(--transition), transform var(--transition);
 }
 
-.form-control:focus,
-.form-select:focus {
-  border-color: #6b7280;
-  box-shadow: 0 0 0 0.15rem rgba(107, 114, 128, 0.25);
+.navbar-toggler:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
 }
 
-/* Botones generales */
-.btn-primary {
-  background: #2563eb;
-  border: none;
+/* ============================
+   TABLAS (para admin)
+   ============================ */
+
+.table {
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
-.btn-primary:hover {
-  background: #1e4fcf;
+.table thead {
+  background: var(--primary);
+  color: white;
 }
 
-.btn-secondary {
-  background: #4b5563;
-  border: none;
+.table tbody tr:hover {
+  background: rgba(13,110,253,0.08);
+  transition: background var(--transition);
 }
 
-.btn-secondary:hover {
-  background: #374151;
+/* ============================
+   NAVBAR MODERNA
+   ============================ */
+
+.modern-navbar {
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.navbar.scrolled {
+  background: #0b5ed7 !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Subrayado animado */
+.nav-link {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #fff !important;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: white;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Botón hamburguesa mejorado */
+.navbar-toggler {
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.navbar-toggler:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
 }
