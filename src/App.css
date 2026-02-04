@@ -1,0 +1,147 @@
+/* Tarjetas generales */
+.reserva-card {
+  border-radius: 14px;
+  border: 1px solid #dcdcdc;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.reserva-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Títulos */
+.reserva-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+/* Fecha */
+.reserva-fecha {
+  font-weight: 500;
+  color: #555;
+}
+
+/* Horarios */
+.reserva-horario {
+  background: #f3f4f6;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e2e2;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+/* Total */
+.reserva-total {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f5132;
+}
+
+/* Botón cancelar */
+.btn-cancelar {
+  background: #b02a37;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: white;
+  transition: background 0.2s ease;
+}
+
+.btn-cancelar:hover {
+  background: #92232e;
+}
+
+/* Caja de desglose */
+.desglose-box {
+  border-radius: 14px;
+  background: #f8f9fa;
+  border: 1px solid #dcdcdc;
+  padding: 20px;
+}
+
+.desglose-box h5 {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Botón reservar */
+.btn-reservar {
+  font-size: 1.15rem;
+  padding: 12px 20px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+/* Navbar más seria */
+.navbar {
+  background: #1f2937 !important; /* gris oscuro elegante */
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #ffffff !important;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  color: #e5e7eb !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+}
+
+.btn-outline-light {
+  border-width: 2px;
+  font-weight: 600;
+}
+
+/* Formularios */
+.card {
+  border-radius: 14px !important;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-control,
+.form-select {
+  border-radius: 10px;
+  border: 1px solid #cfcfcf;
+  padding: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #6b7280;
+  box-shadow: 0 0 0 0.15rem rgba(107, 114, 128, 0.25);
+}
+
+/* Botones generales */
+.btn-primary {
+  background: #2563eb;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #1e4fcf;
+}
+
+.btn-secondary {
+  background: #4b5563;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background: #374151;
+}
