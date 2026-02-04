@@ -1,37 +1,30 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { apiFetch } from "../services/api";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true); // ⭐ NUEVO
+  const [loading, setLoading] = useState(true);
 
-  // 🔐 LOGIN REAL CON FLASK
+  // 🔐 LOGIN REAL CON FLASK (ya usando apiFetch)
   const login = async (dni, password) => {
     try {
-      const res = await fetch("http://localhost:5000/auth/login", {
+      // 1) Login → devuelve token
+      const data = await apiFetch("/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dni, password })
+        body: JSON.stringify({ dni, password }),
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Error al iniciar sesión");
-      }
 
       const tokenValue = data.access_token;
 
-      const meRes = await fetch("http://localhost:5000/auth/me", {
-        headers: {
-          "Authorization": `Bearer ${tokenValue}`
-        }
+      // 2) Obtener datos del usuario
+      const userData = await apiFetch("/auth/me", {
+        headers: { Authorization: `Bearer ${tokenValue}` },
       });
 
-      const userData = await meRes.json();
-
+      // 3) Guardar sesión
       setUser(userData);
       setToken(tokenValue);
 
@@ -64,7 +57,7 @@ export function AuthProvider({ children }) {
       setToken(savedToken);
     }
 
-    setLoading(false); // ⭐ IMPORTANTE
+    setLoading(false);
   }, []);
 
   return (

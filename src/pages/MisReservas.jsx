@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { apiFetch } from "../services/api";
 
 export default function MisReservas() {
   const { token } = useAuth();
@@ -7,18 +8,14 @@ export default function MisReservas() {
   const [mensaje, setMensaje] = useState("");
 
   const cargarReservas = async () => {
-    const res = await fetch("http://localhost:5000/reservas", {
-      headers: { "Authorization": `Bearer ${token}` }
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      setMensaje(data.error || "Error al cargar reservas");
-      return;
+    try {
+      const data = await apiFetch("/reservas", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setReservas(data);
+    } catch (err) {
+      setMensaje(err.data?.error || "Error al cargar reservas");
     }
-
-    setReservas(data);
   };
 
   useEffect(() => {
@@ -28,20 +25,17 @@ export default function MisReservas() {
   const cancelarReserva = async (id) => {
     if (!confirm("¿Seguro que quieres cancelar esta reserva?")) return;
 
-    const res = await fetch(`http://localhost:5000/reservas/${id}`, {
-      method: "DELETE",
-      headers: { "Authorization": `Bearer ${token}` }
-    });
+    try {
+      await apiFetch(`/reservas/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      setMensaje(data.error || "Error al cancelar la reserva");
-      return;
+      setMensaje("Reserva cancelada correctamente");
+      cargarReservas();
+    } catch (err) {
+      setMensaje(err.data?.error || "Error al cancelar la reserva");
     }
-
-    setMensaje("Reserva cancelada correctamente");
-    cargarReservas();
   };
 
   return (
@@ -57,7 +51,6 @@ export default function MisReservas() {
       {reservas.map((r) => (
         <div key={r.id} className="card reserva-card mb-4">
           <div className="card-body">
-
             <h4 className="reserva-header mb-2">{r.pista_nombre}</h4>
 
             <p className="reserva-fecha mb-2">
@@ -77,13 +70,9 @@ export default function MisReservas() {
 
             <h4 className="reserva-total">Total: {r.precio_total}€</h4>
 
-            <button
-              className="btn btn-cancelar w-100 mt-3 fw-semibold"
-              onClick={() => cancelarReserva(r.id)}
-            >
+            <button className="btn btn-cancelar w-100 mt-3 fw-semibold" onClick={() => cancelarReserva(r.id)}>
               Cancelar reserva
             </button>
-
           </div>
         </div>
       ))}
