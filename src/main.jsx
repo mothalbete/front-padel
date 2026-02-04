@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 
-import "bootstrap/dist/css/bootstrap.min.css";  // primero Bootstrap
-import "./App.css";                             // tus estilos, los últimos
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";   // ⭐ NECESARIO PARA NAVBAR
+import "./App.css";
 
 import { AuthProvider } from "./context/AuthContext.jsx";
 
